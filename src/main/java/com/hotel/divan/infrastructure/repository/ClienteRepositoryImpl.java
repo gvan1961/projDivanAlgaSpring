@@ -2,6 +2,8 @@ package com.hotel.divan.infrastructure.repository;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.hotel.divan.domain.model.Cliente;
 import com.hotel.divan.domain.repository.ClienteRepository;
 
@@ -9,6 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
+@Component
 public class ClienteRepositoryImpl  implements ClienteRepository {
     
 	@PersistenceContext
