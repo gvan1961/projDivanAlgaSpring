@@ -22,5 +22,14 @@ public class Cliente {
 	
 	@Column(name = "nome",length = 40, nullable = false)
 	private String nome;
+	
+	@Column(name = "cpf")
+	private Integer cpf;
+	
+	@Column
+	private String telefone;
+	
+	//data nascimento
+	
 
 }
