@@ -12,7 +12,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Component
-public class CategoriaProdutoImpl implements CategoriaProdutoRepository {
+public class CategoriaProdutoRepositoryImpl implements CategoriaProdutoRepository {
 	
 	@PersistenceContext
 	private EntityManager manager;
