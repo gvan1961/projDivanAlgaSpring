@@ -34,12 +34,14 @@ public class TipoAptoRepositoryImpl implements TipoAptoRepository {
 		return manager.merge(tipoApto);
 	}
 
+	@Transactional
 	@Override
 	public TipoApto alterar(TipoApto tipoApto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional
 	@Override
 	public void remover(TipoApto tipoApto) {
 		tipoApto = buscar(tipoApto.getId());
