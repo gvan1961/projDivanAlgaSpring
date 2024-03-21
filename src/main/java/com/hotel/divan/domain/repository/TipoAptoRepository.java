@@ -10,6 +10,6 @@ public interface TipoAptoRepository {
 	TipoApto buscar(Long id);
 	TipoApto salvar(TipoApto tipoApto);
 	TipoApto alterar(TipoApto tipoApto);
-	void remover(TipoApto tipoApto);
+	void remover(Long id);
 
 }

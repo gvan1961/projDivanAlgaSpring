@@ -18,34 +18,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.divan.domain.exception.EntidadeEmUsoException;
 import com.hotel.divan.domain.exception.EntidadeNaoEncontradaException;
-import com.hotel.divan.domain.model.TipoApto;
-import com.hotel.divan.domain.repository.TipoAptoRepository;
-import com.hotel.divan.domain.service.CadastroTipoAptoService;
+import com.hotel.divan.domain.model.Apto;
+import com.hotel.divan.domain.repository.AptoRepository;
+import com.hotel.divan.domain.service.CadastroAptoService;
 
 
 @RestController
-@RequestMapping("/tipoAptos")
-public class TipoAptoController {
-	
-	//private static final HttpStatus value =  = null;
-	@Autowired
-	private TipoAptoRepository tipoAptoRepository;
+@RequestMapping("/aptos")
+public class AptoController {
 	
 	@Autowired
-	private CadastroTipoAptoService cadastroTipoApto;
+	private AptoRepository aptoRepository;
+	
+	@Autowired
+	private CadastroAptoService cadastroApto;
 
 	@GetMapping
-	public List<TipoApto> listar() {
-		return tipoAptoRepository.listar();
+	public List<Apto> listar() {
+		return aptoRepository.listar();
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
-	@GetMapping("/{tipoAptoId}")
-	public ResponseEntity<TipoApto> buscar(@PathVariable("tipoAptoId") Long id) {
-		TipoApto tipoApto = tipoAptoRepository.buscar(id);
+	@GetMapping("/{aptoId}")
+	public ResponseEntity<Apto> buscar(@PathVariable("aptoId") Long id) {
+		Apto apto = aptoRepository.buscar(id);
 		
-		if (tipoApto != null) {
-			return ResponseEntity.ok(tipoApto);
+		if (apto != null) {
+			return ResponseEntity.ok(apto);
 		}
 		
 		//return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -54,30 +53,30 @@ public class TipoAptoController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public TipoApto adicionar(@RequestBody TipoApto tipoApto) {
-		return cadastroTipoApto.salvar(tipoApto);
+	public Apto adicionar(@RequestBody Apto apto) {
+		return cadastroApto.salvar(apto);
 	}
 	
-	@PutMapping("/{tipoAptoId}")
-	public ResponseEntity<TipoApto> atualizar(@PathVariable Long tipoAptoId,
-			@RequestBody TipoApto tipoApto) {
-		TipoApto tipoAptoAtual = tipoAptoRepository.buscar(tipoAptoId);
+	@PutMapping("/{aptoId}")
+	public ResponseEntity<Apto> atualizar(@PathVariable Long aptoId,
+			@RequestBody Apto apto) {
+		Apto aptoAtual = aptoRepository.buscar(aptoId);
 		
-		if (tipoAptoAtual != null) {
+		if (aptoAtual != null) {
 //			cozinhaAtual.setNome(cozinha.getNome());
-			BeanUtils.copyProperties(tipoApto, tipoAptoAtual, "id");
+			BeanUtils.copyProperties(apto, aptoAtual, "id");
 			
-			tipoAptoAtual = tipoAptoRepository.salvar(tipoAptoAtual);
-			return ResponseEntity.ok(tipoAptoAtual);
+			aptoAtual = aptoRepository.salvar(aptoAtual);
+			return ResponseEntity.ok(aptoAtual);
 		}
 		
 		return ResponseEntity.notFound().build();
 	}
 	
-	@DeleteMapping("/{tipoAptoId}")
-	public ResponseEntity<TipoApto> remover(@PathVariable Long tipoAptoId) {
+	@DeleteMapping("/{aptoId}")
+	public ResponseEntity<Apto> remover(@PathVariable Long aptoId) {
 		try {
-			cadastroTipoApto.excluir(tipoAptoId);	
+			cadastroApto.excluir(aptoId);	
 			return ResponseEntity.noContent().build();
 			
 		} catch (EntidadeNaoEncontradaException e) {
@@ -87,4 +86,5 @@ public class TipoAptoController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
+
 }

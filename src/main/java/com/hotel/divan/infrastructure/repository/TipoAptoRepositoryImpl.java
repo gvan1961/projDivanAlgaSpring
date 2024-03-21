@@ -2,6 +2,7 @@ package com.hotel.divan.infrastructure.repository;
 
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import com.hotel.divan.domain.model.TipoApto;
@@ -43,8 +44,13 @@ public class TipoAptoRepositoryImpl implements TipoAptoRepository {
 
 	@Transactional
 	@Override
-	public void remover(TipoApto tipoApto) {
-		tipoApto = buscar(tipoApto.getId());
+	public void remover(Long id) {
+	  TipoApto tipoApto = buscar(id);
+	  
+	    if(tipoApto == null) {
+	    	throw new EmptyResultDataAccessException(1);
+	    }
+	  
 		manager.remove(tipoApto);
 		
 	}

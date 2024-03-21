@@ -10,6 +10,6 @@ public interface AptoRepository {
 	Apto buscar(Long id);
 	Apto salvar(Apto apto);
 	Apto alterar(Apto apto);
-	void remover(Apto apto);
+	void remover(Long id);
 	
 }
